@@ -2,6 +2,7 @@
 
 * {
     font-family: "Poppins";
+    text-align: center;
 }
 
 form p {
@@ -16,5 +17,13 @@ form p {
 }
 
 #cad {
+    text-align: center;
+}
+
+form h1 i {
+    color: rgb(226, 78, 78);
+}
+
+.php {
     text-align: center;
 }
