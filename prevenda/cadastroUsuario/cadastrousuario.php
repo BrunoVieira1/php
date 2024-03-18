@@ -1,20 +1,16 @@
-<link rel="stylesheet" href="../cad.css">
 <?php
-session_start();
 
-$connect = mysql_connect('localhost', 'root', '');
+$conectar = mysql_connect('localhost', 'root', '');
+$banco = mysql_select_db("revenda");
 
-$banco = mysql_select_db('revenda');
-
-if (isset($_POST['gravar'])) {
+if (isset($_POST['cadastrar'])) {
     $codigo = $_POST['codigo'];
     $nome = $_POST['nome'];
-    $codmarca = $_POST['codmarca'];
+    $login = $_POST['login'];
+    $senha = $_POST['senha'];
 
-    $sql = "insert modelo (codigo, nome, codmarca) values ('$codigo', '$nome', '$codmarca')";
-
+    $sql = "insert usuario (codigo, nome, login, senha) values ('$codigo', '$nome', '$login', '$senha')";
     $resultado = mysql_query($sql);
-
     if ($resultado === TRUE) {
         echo "Dados gravados.";
     } else {
@@ -25,9 +21,10 @@ if (isset($_POST['gravar'])) {
 if (isset($_POST['excluir'])) {
     $codigo = $_POST['codigo'];
     $nome = $_POST['nome'];
-    $codmarca = $_POST['codmarca'];
+    $login = $_POST['login'];
+    $senha = $_POST['senha'];
 
-    $sql = "delete from modelo where codigo = '$codigo'";
+    $sql = "delete from usuario where codigo = '$codigo'";
 
     $resultado = mysql_query($sql);
 
@@ -41,9 +38,10 @@ if (isset($_POST['excluir'])) {
 if (isset($_POST['alterar'])) {
     $codigo = $_POST['codigo'];
     $nome = $_POST['nome'];
-    $codmarca = $_POST['codmarca'];
+    $login = $_POST['login'];
+    $senha = $_POST['senha'];
 
-    $sql = "update modelo set nome = '$nome' where codigo = '$codigo'";
+    $sql = "update usuario set nome = '$nome', login = '$login' where codigo = '$codigo'";
 
     $resultado = mysql_query($sql);
 
@@ -55,12 +53,12 @@ if (isset($_POST['alterar'])) {
 }
 
 if (isset($_POST['pesquisar'])) {
-    $sql = mysql_query("select * from modelo");
-    echo '<div class="php"><h2>modelo Cadastradas</h2>';
+    $sql = mysql_query("select * from usuario");
+    echo '<div class="php"><h2>usuario Cadastradas</h2>';
     while ($dados = mysql_fetch_object($sql)) {
         echo "<h3>Codigo: ".$dados->codigo.", ";
         echo "Nome: ".$dados->nome.", ";
-        echo "CodMarca: ".$dados->codmarca."</h3></div>";
+        echo "Login: ".$dados->login."</h3></div>";
     }
 }
 ?>

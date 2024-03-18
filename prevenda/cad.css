@@ -1,29 +1,71 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 * {
-    font-family: "Poppins";
-    text-align: center;
+  font-family: "Poppins";
+  text-align: center;
+}
+
+body {
+  padding-top: 16px;
 }
 
 form p {
-    display: inline;
+  display: inline;
+  margin-bottom: 16px;
+}
+form input {
+  margin-bottom: 16px;
 }
 #buttons {
-    width: 100vw;
-    display: flex;
-    justify-content: center;
-    margin-top: 50px;
-    gap: 10px;
+  width: 50vw;
+  display: flex;
+  flex-direction: column;
+  margin-left: 148px;
+  gap: 10px;
+}
+
+#buttons input {
+  width: 256px;
+  height: 78px;
+  background-color: crimson;
+  color: white;
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 133ms;
+  font-size: 20px;
+}
+#buttons input:hover {
+  background-color: rgb(143, 26, 49);
 }
 
 #cad {
-    text-align: center;
+  text-align: center;
+  display: flex;
+}
+
+.div1 {
+  width: 50vw;
+  text-align: left;
+  margin-left: 108px;
 }
 
 form h1 i {
-    color: rgb(226, 78, 78);
+  color: rgb(226, 78, 78);
 }
 
 .php {
-    text-align: center;
+  text-align: center;
+}
+.php img {
+  margin: 0 56px 0 56px;
+  border-radius: 4px;
+}
+
+.login {
+  padding: 12px 16px;
+  margin-top: 10000px;
+  background-color: crimson;
+  color: white;
+  border-radius: 6px;
 }

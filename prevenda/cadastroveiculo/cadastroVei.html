@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="../cad.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastro Modelo</title>
+  </head>
+  <body>
+    <a class="login" href="../login.php">Login</a>
+    <form
+      name="formulario"
+      action="cadastroVei.php"
+      method="POST"
+      enctype="multipart/form-data"
+    >
+      <h1>Cadastro <i>Modelo</i></h1>
+      <div id="cad">
+        <div class="div1">
+          <p>Codigo:</p>
+          <input type="text" name="codigo" size="10" /><br />
+          <p>Descricao:</p>
+          <input type="text" name="descricao" size="30" /><br />
+          <p>CodModelo:</p>
+          <input type="text" name="codmodelo" size="10" /><br />
+          <p>Ano:</p>
+          <input type="text" name="ano" size="10" /><br />
+          <p>Cor:</p>
+          <input type="text" name="cor" size="10" /><br />
+          <p>placa:</p>
+          <input type="text" name="placa" size="30" /><br />
+          <p>Opcionais:</p>
+          <input type="text" name="opcionais" size="30" /><br />
+          <p>valor:</p>
+          <input type="text" name="valor" size="30" /><br />
+          <p>Foto1:</p>
+          <input type="file" name="foto1" /><br />
+          <p>Foto2:</p>
+          <input type="file" name="foto2" /><br />
+        </div>
+        <div id="buttons">
+          <input type="submit" name="gravar" value="Gravar" />
+          <input type="submit" name="excluir" value="Excluir" />
+          <input type="submit" name="alterar" value="Alterar" />
+          <input type="submit" name="pesquisar" value="Pesquisar" />
+        </div>
+      </div>
+    </form>
+  </body>
+</html>
