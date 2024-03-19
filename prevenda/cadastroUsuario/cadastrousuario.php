@@ -1,7 +1,7 @@
 <?php
 
-$conectar = mysql_connect('localhost', 'root', '');
-$banco = mysql_select_db("revenda");
+$conectar = mysqli_connect('localhost', 'root', '');
+$banco = mysqli_select_db($connect, "revenda");
 
 if (isset($_POST['cadastrar'])) {
     $codigo = $_POST['codigo'];
@@ -10,7 +10,7 @@ if (isset($_POST['cadastrar'])) {
     $senha = $_POST['senha'];
 
     $sql = "insert usuario (codigo, nome, login, senha) values ('$codigo', '$nome', '$login', '$senha')";
-    $resultado = mysql_query($sql);
+    $resultado = mysqli_query($connect, $sql);
     if ($resultado === TRUE) {
         echo "Dados gravados.";
     } else {
@@ -26,7 +26,7 @@ if (isset($_POST['excluir'])) {
 
     $sql = "delete from usuario where codigo = '$codigo'";
 
-    $resultado = mysql_query($sql);
+    $resultado = mysqli_query($connect, $sql);
 
     if ($resultado === TRUE) {
         echo "Dados excluidos.";
@@ -43,7 +43,7 @@ if (isset($_POST['alterar'])) {
 
     $sql = "update usuario set nome = '$nome', login = '$login' where codigo = '$codigo'";
 
-    $resultado = mysql_query($sql);
+    $resultado = mysqli_query($connect, $sql);
 
     if ($resultado === TRUE) {
         echo "Dados alterados.";
@@ -53,9 +53,9 @@ if (isset($_POST['alterar'])) {
 }
 
 if (isset($_POST['pesquisar'])) {
-    $sql = mysql_query("select * from usuario");
+    $sql = mysqli_query($connect, "select * from usuario");
     echo '<div class="php"><h2>usuario Cadastradas</h2>';
-    while ($dados = mysql_fetch_object($sql)) {
+    while ($dados = mysqli_fetch_object($sql)) {
         echo "<h3>Codigo: ".$dados->codigo.", ";
         echo "Nome: ".$dados->nome.", ";
         echo "Login: ".$dados->login."</h3></div>";

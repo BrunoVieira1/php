@@ -1,9 +1,9 @@
 <?php
 session_start();
 
-$connect = mysql_connect('localhost', 'root', '');
+$connect = mysqli_connect('localhost', 'root', '');
 
-$banco = mysql_select_db('revenda');
+$banco = mysqli_select_db($connect, 'revenda');
 
 if (isset($_POST['gravar'])) {
     $codigo = $_POST['codigo'];
@@ -11,7 +11,7 @@ if (isset($_POST['gravar'])) {
 
     $sql = "insert marca (codigo, nome) values ('$codigo','$nome')";
 
-    $resultado = mysql_query($sql);
+    $resultado = mysqli_query($connect, $sql);
 
     if ($resultado === TRUE) {
         echo "Dados gravados.";

@@ -2,9 +2,9 @@
 <?php
 session_start();
 
-$connect = mysql_connect('localhost', 'root', '');
+$connect = mysqli_connect('localhost', 'root', '');
 
-$banco = mysql_select_db('revenda');
+$banco = mysqli_select_db($connect, 'revenda');
 
 if (isset($_POST['gravar'])) {
     $codigo = $_POST['codigo'];
@@ -34,7 +34,7 @@ if (isset($_POST['gravar'])) {
 
     $sql = "insert veiculo (codigo, descricao, codmodelo, ano, cor, placa, opcionais, valor, foto1, foto2) values ('$codigo', '$descricao', '$codmodelo', '$ano', '$cor', '$placa', '$opcionais', '$valor', '$novo_nome1', '$novo_nome2')";
 
-    $resultado = mysql_query($sql);
+    $resultado = mysqli_query($connect, $sql);
 
     if ($resultado === TRUE) {
         echo "Dados gravados.";
@@ -56,7 +56,7 @@ if (isset($_POST['excluir'])) {
 
     $sql = "delete from veiculo where codigo = '$codigo'";
 
-    $resultado = mysql_query($sql);
+    $resultado = mysqli_query($connect, $sql);
 
     if ($resultado === TRUE) {
         echo "Dados excluidos.";
@@ -77,7 +77,7 @@ if (isset($_POST['alterar'])) {
 
     $sql = "update veiculo set descricao = '$descricao', ano = '$ano', cor = '$cor', placa = '$placa', opcionais = '$opcionais', valor = '$valor' where codigo = '$codigo'";
     
-    $resultado = mysql_query($sql);
+    $resultado = mysqli_query($connect, $sql);
 
     if ($resultado === TRUE) {
         echo "Dados alterados.";
@@ -87,9 +87,9 @@ if (isset($_POST['alterar'])) {
 }
 
 if (isset($_POST['pesquisar'])) {
-    $sql = mysql_query("select * from veiculo");
+    $sql = mysqli_query($connect, "select * from veiculo");
     echo '<div class="php"><h2>veiculos Cadastradas</h2>';
-    while ($dados = mysql_fetch_object($sql)) {
+    while ($dados = mysqli_fetch_object($sql)) {
         echo "<h3>Codigo: ".$dados->codigo.", ";
         echo "Descricao: ".$dados->descricao.", ";
         echo "CodModelo: ".$dados->codmodelo.", ";

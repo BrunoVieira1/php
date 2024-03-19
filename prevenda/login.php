@@ -7,13 +7,13 @@
     <link rel="stylesheet" href="login.css">
 </head>
 <?php
-    $conectar = mysql_connect('localhost', 'root', '');
-    $banco = mysql_select_db("revenda");
+    $connect = mysqli_connect('localhost', 'root', '');
+    $banco = mysqli_select_db($connect, "revenda");
     if (isset($_POST['conectar'])) {
         $login = $_POST['login'];
         $senha = $_POST['senha'];
-        $sql = mysql_query("select * from usuario where login='$login' and senha='$senha'");
-        $resultado = mysql_num_rows($sql);
+        $sql = mysqli_query($connect, "select * from usuario where login='$login' and senha='$senha'");
+        $resultado = mysqli_num_rows($sql);
         if ($resultado == 0) {
             echo "login ou senha invalido";
         } else {

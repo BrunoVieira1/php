@@ -1,7 +1,7 @@
 <?php
 
-$connect = mysql_connect('localhost','root','');
-$db      = mysql_select_db('revenda');
+$connect = mysqli_connect('localhost','root','');
+$db      = mysqli_select_db( $connect, 'revenda');
 ?>
 
 <!DOCTYPE html>
@@ -24,8 +24,8 @@ $db      = mysql_select_db('revenda');
         <select name="marca">
             <option value="" selected="selected">Selecione</option>
             <?php
-        $query = mysql_query("SELECT codigo, nome FROM marca");
-        while($marcas = mysql_fetch_array($query))
+        $query = mysqli_query($connect, "SELECT codigo, nome FROM marca");
+        while($marcas = mysqli_fetch_array($query))
         {?>
         <option value="<?php echo $marcas['codigo']?>">
                        <?php echo $marcas['nome']  ?></option>
@@ -36,8 +36,8 @@ $db      = mysql_select_db('revenda');
         <select name="modelo">
             <option value="" selected="selected">Selecione</option>
             <?php
-        $query = mysql_query("SELECT codigo, nome FROM modelo");
-        while($modelos = mysql_fetch_array($query))
+        $query = mysqli_query($connect, "SELECT codigo, nome FROM modelo");
+        while($modelos = mysqli_fetch_array($query))
         {?>
         <option value="<?php echo $modelos['codigo']?>">
                        <?php echo $modelos['nome']  ?></option>
@@ -52,11 +52,11 @@ $db      = mysql_select_db('revenda');
 if (isset($_POST['pesquisar'])) {
 
 $sql_marcas  = "SELECT * FROM marca ";
-$getmarcas = mysql_query($sql_marcas);
+$getmarcas = mysqli_query($connect, $sql_marcas);
 
 
 $sql_modelos  = "SELECT * FROM modelo ";
-$getmodelos = mysql_query($sql_modelos);
+$getmodelos = mysqli_query($connect, $sql_modelos);
 
 
 
@@ -66,59 +66,77 @@ $modelo  = (empty($_POST['modelo']))? 'null' : $_POST['modelo'];
 
 if (($marca <> 'null') and ($modelo == 'null'))
 {
-    $sql_veiculos       = "SELECT descricao, ano, cor, valor
+    $sql_veiculos       = "SELECT descricao, ano, cor, valor, foto1, foto2, opcionais
                             FROM veiculo,marca,modelo
                             WHERE veiculo.codmodelo = modelo.codigo
                             and modelo.codmarca = marca.codigo
                             and marca.codigo = $marca ";
-    $veiculos = mysql_query($sql_veiculos);
+    $veiculos = mysqli_query($connect, $sql_veiculos);
 }
 
 else if (($marca == 'null') and ($modelo <> 'null'))
 {
-    $sql_veiculos       = "SELECT descricao, ano, cor, valor
+    $sql_veiculos       = "SELECT descricao, ano, cor, valor, foto1, foto2, opcionais
                             FROM veiculo,marca,modelo
                             WHERE veiculo.codmodelo = modelo.codigo
                             and modelo.codmarca = marca.codigo
                             and modelo.codigo = $modelo ";
-    $veiculos = mysql_query($sql_veiculos);
+    $veiculos = mysqli_query($connect, $sql_veiculos);
 }
 
 else if (($marca == 'null') and ($modelo == 'null')) {
-    $sql_veiculos       = "SELECT descricao, ano, cor, valor
+    $sql_veiculos       = "SELECT descricao, ano, cor, valor, foto1, foto2, opcionais
                             FROM veiculo,marca,modelo
                             WHERE veiculo.codmodelo = modelo.codigo
                             and modelo.codmarca = marca.codigo";
-    $veiculos = mysql_query($sql_veiculos);
+    $veiculos = mysqli_query($connect, $sql_veiculos);
 }
 else if (($marca <> 'null') and ($modelo <> 'null')) {
-    $sql_veiculos       = "SELECT descricao, ano, cor, valor
+    $sql_veiculos       = "SELECT descricao, ano, cor, valor, foto1, foto2, opcionais
                             FROM veiculo,marca,modelo
                             WHERE veiculo.codmodelo = modelo.codigo
                             and modelo.codmarca = marca.codigo
                             and modelo.codigo = $modelo
                             and marca.codigo = $marca ";
-    $veiculos = mysql_query($sql_veiculos);
+    $veiculos = mysqli_query($connect, $sql_veiculos);
 }
 
 
 
 
-if(mysql_num_rows($veiculos) == 0)
+if(mysqli_num_rows($veiculos) == 0)
 {
    echo '<h3>Desculpe, mas sua busca nao retornou resultados ... </h3>';
 }
 else
 {
-   echo "<div class='desgraca'><h3>Resultado da pesquisa de Veiculos: </h3>";
-   echo "<ul>";
-			while($resultado = mysql_fetch_array($veiculos)){
+   /* echo "<div class='desgraca'><h3>Resultado da pesquisa de Veiculos: </h3>";
+   echo "<table>";
+   echo "<tr>";
+   echo "<th>Descrição</th>";
+   echo "<th>Ano</th>";
+   echo "<th>Cor</th>";
+   echo "<th>Valor</th>";
+			while($resultado = mysqli_fetch_array($veiculos)){
 			echo "<tr><td>".utf8_encode($resultado['descricao'])."</td>
 			          <td>".utf8_encode($resultado['ano'])."</td>
 			          <td>".utf8_encode($resultado['cor'])."</td>
-			          <td>".utf8_encode($resultado['valor'])."</td></tr><br><br>";
+			          <td>".utf8_encode($resultado['valor'])."</td></tr>";
 			}
-    echo "</ul></div></div>";
+    echo "</table>"; */
+        while($resultado = mysqli_fetch_array($veiculos)){
+            echo '<div class="fds">
+            <img src= "img/'.$resultado["foto1"].'" width="300px" height="200px" /> <div class="fds1">
+            <h3>'.utf8_encode($resultado['descricao']).'</h3><div class="fds2">
+            <p>'.utf8_encode($resultado['opcionais']).'</p>
+            <p>'.utf8_encode($resultado['ano']).'</p>
+            <p>'.utf8_encode($resultado['cor']).'</p></div>
+            <h2>R$: '.utf8_encode($resultado['valor']).'</h2>
+            </div>
+            </div>';
+        }
+    echo "</div></div>";
+
 }
 }
 ?>

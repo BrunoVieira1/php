@@ -2,9 +2,9 @@
 <?php
 session_start();
 
-$connect = mysql_connect('localhost', 'root', '');
+$connect = mysqli_connect('localhost', 'root', '');
 
-$banco = mysql_select_db('revenda');
+$banco = mysqli_select_db($connect, 'revenda');
 
 if (isset($_POST['gravar'])) {
     $codigo = $_POST['codigo'];
@@ -13,7 +13,7 @@ if (isset($_POST['gravar'])) {
 
     $sql = "insert modelo (codigo, nome, codmarca) values ('$codigo', '$nome', '$codmarca')";
 
-    $resultado = mysql_query($sql);
+    $resultado = mysqli_query($connect, $sql);
 
     if ($resultado === TRUE) {
         echo "Dados gravados.";
@@ -29,7 +29,7 @@ if (isset($_POST['excluir'])) {
 
     $sql = "delete from modelo where codigo = '$codigo'";
 
-    $resultado = mysql_query($sql);
+    $resultado = mysqli_query($connect, $sql);
 
     if ($resultado === TRUE) {
         echo "Dados excluidos.";
@@ -45,7 +45,7 @@ if (isset($_POST['alterar'])) {
 
     $sql = "update modelo set nome = '$nome' where codigo = '$codigo'";
 
-    $resultado = mysql_query($sql);
+    $resultado = mysqli_query($connect, $sql);
 
     if ($resultado === TRUE) {
         echo "Dados alterados.";
@@ -55,9 +55,9 @@ if (isset($_POST['alterar'])) {
 }
 
 if (isset($_POST['pesquisar'])) {
-    $sql = mysql_query("select * from modelo");
+    $sql = mysqli_query($connect, "select * from modelo");
     echo '<div class="php"><h2>modelo Cadastradas</h2>';
-    while ($dados = mysql_fetch_object($sql)) {
+    while ($dados = mysqli_fetch_object($sql)) {
         echo "<h3>Codigo: ".$dados->codigo.", ";
         echo "Nome: ".$dados->nome.", ";
         echo "CodMarca: ".$dados->codmarca."</h3></div>";

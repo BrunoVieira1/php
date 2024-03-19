@@ -9,6 +9,7 @@
 body {
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
 }
 
 h1 {
@@ -21,7 +22,7 @@ h1 {
 form {
   background-color: rgb(255, 148, 167);
   padding: 52px;
-  width: 32vw;
+  width: 24vw;
   border: 3px solid crimson;
   border-top: 0;
   border-radius: 0 0 12px 0;
@@ -29,11 +30,7 @@ form {
 
 .demonio {
   display: flex;
-  width: 90vw;
-}
-
-ul {
-  gap: 12px 0;
+  flex-wrap: wrap;
 }
 
 .desgraca {
@@ -41,7 +38,6 @@ ul {
   display: flex;
   align-items: center;
   flex-direction: column;
-  width: 70vw;
 }
 
 .meio {
@@ -57,4 +53,50 @@ ul {
   width: 48px;
   text-align: center;
   margin: 12px;
+}
+
+table {
+  gap: 12px 0;
+  border-collapse: collapse;
+}
+
+tr {
+  gap: 48px;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+}
+td,
+th {
+  width: 190px;
+}
+
+.fds {
+  margin: 56px;
+  border-radius: 8px;
+  border: 1px solid black;
+  width: 300px;
+}
+
+.fds img {
+  border-radius: 8px 8px 0 0;
+}
+
+.fds h3 {
+  font-size: 18px;
+}
+.fds p {
+  display: inline;
+}
+
+.fds .fds1 {
+  padding: 0 0 12px 12px;
+}
+
+.fds .fds2 {
+  height: 68px;
+  font-size: 14px;
+}
+.fds h2 {
+  font-size: 22px;
 }
